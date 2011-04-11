@@ -26,6 +26,8 @@
     //[infoButton addTarget:self action:@selector(showInfoView:) forControlEvents:UIControlEventTouchUpInside];
     //self.navigationController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
     
+    
+    
     self.navigationController.toolbar.backgroundColor = [UIColor blackColor];
     self.navigationBarStyle = UIBarStyleBlackTranslucent;
     self.navigationController.toolbar.barStyle = UIBarStyleBlackTranslucent;
