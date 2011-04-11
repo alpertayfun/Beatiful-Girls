@@ -48,7 +48,7 @@
 
 }
 - (void)addButtonPressed:(id)sender{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share" delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Share with Facebook",@"Save my Photos", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share" delegate:self cancelButtonTitle:@"Close" destructiveButtonTitle:nil otherButtonTitles:@"Share with Facebook",@"Share with Mail",@"Save my Photos", nil];
 	[actionSheet showInView:self.view];
     [actionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
 	[actionSheet release];
@@ -84,6 +84,20 @@
 	}
     else if (buttonIndex == 1)
     {
+
+        Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+        if (mailClass != nil)
+        {
+            // We must always check whether the current device is configured for sending emails
+            if ([mailClass canSendMail])
+            {
+                [self displayComposerSheet];
+            }
+        }
+        
+    }
+    else if (buttonIndex == 2)
+    {
         NSURL    *aUrl  = [NSURL URLWithString:[_centerPhoto URLForVersion:TTPhotoVersionLarge]];
         NSData   *data = [NSData dataWithContentsOfURL:aUrl];
         UIImage  *img  = [[UIImage alloc] initWithData:data];
@@ -93,7 +107,6 @@
         UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
     }
 }
-
 
 #pragma mark FBSessionDelegate methods
 
@@ -146,6 +159,110 @@
 	[dialog show];
 	
 }
+
+
+#pragma mail compose delegate
+
+-(void)launchMailAppOnDevice
+{
+	NSString *recipients = @"mailto:first@example.com?cc=second@example.com,third@example.com&subject=Hello from California!";
+	NSString *body = @"&body=It is raining in sunny California!";
+	
+	NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
+	email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+}
+
+- (void)receivedObject:(NSDictionary *)dictionary forRequest:(NSString *)connectionIdentifier {
+	
+	NSLog(@"Recieved Object: %@", dictionary);
+}
+
+- (void)directMessagesReceived:(NSArray *)messages forRequest:(NSString *)connectionIdentifier {
+	
+	NSLog(@"Direct Messages Received: %@", messages);
+}
+
+- (void)userInfoReceived:(NSArray *)userInfo forRequest:(NSString *)connectionIdentifier {
+	
+	NSLog(@"User Info Received: %@", userInfo);
+}
+
+- (void)miscInfoReceived:(NSArray *)miscInfo forRequest:(NSString *)connectionIdentifier {
+	
+	NSLog(@"Misc Info Received: %@", miscInfo);
+}
+
+
+-(IBAction)showPicker:(id)sender
+{
+	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+	if (mailClass != nil)
+	{
+		// We must always check whether the current device is configured for sending emails
+		if ([mailClass canSendMail])
+		{
+			[self displayComposerSheet];
+		}
+	}
+}
+
+-(void)displayComposerSheet 
+{
+	
+	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+	picker.mailComposeDelegate = self;
+	
+	[picker setSubject:@"Beatiful Girls for Mobile"];
+	
+    NSString *bodys = [NSString stringWithFormat:@"<img src='%@' alt='%@'><br><br><br>Beatiful Girls for iPhone kullanıyorum.<br><br><br>",[_centerPhoto URLForVersion:TTPhotoVersionLarge],[_centerPhoto URLForVersion:TTPhotoVersionLarge]];
+    
+	NSString *emailBody = bodys;
+    
+	[picker setMessageBody:emailBody isHTML:YES];
+	
+	[self presentModalViewController:picker animated:YES];
+    [picker release];
+}
+
+
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
+{	
+	// Notifies users about errors associated with the interface
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			//message.text = @"Result: canceled";
+			NSLog(@"Result: canceled");
+			break;
+		case MFMailComposeResultSaved:
+			//message.text = @"Result: saved";
+			NSLog(@"Result: saved");
+			break;
+		case MFMailComposeResultSent:
+			//message.text = @"Result: sent";
+			NSLog(@"Result: sent");
+			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Mail Gönderildi" message:@"Mailiniz gönderilmiştir." delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+			// optional - add more buttons:
+			[alert addButtonWithTitle:@"Yes"];
+			[alert show];
+			break;
+		case MFMailComposeResultFailed:
+			//message.text = @"Result: failed";
+			alert = [[[UIAlertView alloc] initWithTitle:@"Mail Gönderilemedi" message:@"Eğer ki bu hatayı görüyorsanız lütfen ilk önce mail hesabınızı kontrol ediniz." delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+			NSLog(@"Result: failed");
+			break;
+		default:
+			//message.text = @"Result: not sent";
+			alert = [[[UIAlertView alloc] initWithTitle:@"Mail Gönderilemedi" message:@"Eğer ki bu hatayı görüyorsanız lütfen ilk önce mail hesabınızı kontrol ediniz." delegate:self cancelButtonTitle:nil otherButtonTitles:nil] autorelease];
+			NSLog(@"Result: not sent");
+			break;
+	}
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {

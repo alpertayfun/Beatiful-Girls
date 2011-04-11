@@ -36,6 +36,10 @@
 		1B77C30C1350C6030007FB16 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B77C3071350C6030007FB16 /* SBJsonWriter.m */; };
 		1B808415133A8753005215F0 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B808412133A8752005215F0 /* Photo.m */; };
 		1B808416133A8753005215F0 /* PhotoSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B808414133A8752005215F0 /* PhotoSet.m */; };
+		1BBB38E3135344E600F33A5C /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBB38E2135344E600F33A5C /* Tweet.m */; };
+		1BBB38EA135346F600F33A5C /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BBB38E8135346F600F33A5C /* libxml2.dylib */; };
+		1BBB38EB135346F600F33A5C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BBB38E9135346F600F33A5C /* libz.dylib */; };
+		1BBB39E6135360D800F33A5C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BBB39E5135360D800F33A5C /* MessageUI.framework */; };
 		3201088596B4756681693705 /* libThree20UICommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3201088596B4756681693704 /* libThree20UICommon.a */; };
 		320A2827FEC940B25BC42C65 /* libThree20Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320A2827FEC940B25BC42C64 /* libThree20Core.a */; };
 		320A5A189C235877202780D5 /* libThree20Network.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320A5A189C235877202780D4 /* libThree20Network.a */; };
@@ -251,6 +255,11 @@
 		1B808412133A8752005215F0 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		1B808413133A8752005215F0 /* PhotoSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoSet.h; sourceTree = "<group>"; };
 		1B808414133A8752005215F0 /* PhotoSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoSet.m; sourceTree = "<group>"; };
+		1BBB38E1135344E600F33A5C /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tweet.h; path = ../Tweet.h; sourceTree = "<group>"; };
+		1BBB38E2135344E600F33A5C /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tweet.m; path = ../Tweet.m; sourceTree = "<group>"; };
+		1BBB38E8135346F600F33A5C /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		1BBB38E9135346F600F33A5C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1BBB39E5135360D800F33A5C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3201088596B4756681693700 /* Three20UICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UICommon.xcodeproj; path = ../../three20/src/Three20UICommon/Three20UICommon.xcodeproj; sourceTree = SOURCE_ROOT; };
 		320A2827FEC940B25BC42C60 /* Three20Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Core.xcodeproj; path = ../../three20/src/Three20Core/Three20Core.xcodeproj; sourceTree = SOURCE_ROOT; };
 		320A5A189C235877202780D0 /* Three20Network.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Network.xcodeproj; path = ../../three20/src/Three20Network/Three20Network.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -267,6 +276,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BBB39E6135360D800F33A5C /* MessageUI.framework in Frameworks */,
+				1BBB38EA135346F600F33A5C /* libxml2.dylib in Frameworks */,
+				1BBB38EB135346F600F33A5C /* libz.dylib in Frameworks */,
 				3201088596B4756681693705 /* libThree20UICommon.a in Frameworks */,
 				320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */,
 				320A737074758E53BA54BE95 /* libThree20UINavigator.a in Frameworks */,
@@ -310,6 +322,9 @@
 		1B769B66133A80480026FD1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1BBB39E5135360D800F33A5C /* MessageUI.framework */,
+				1BBB38E8135346F600F33A5C /* libxml2.dylib */,
+				1BBB38E9135346F600F33A5C /* libz.dylib */,
 				3201088596B4756681693700 /* Three20UICommon.xcodeproj */,
 				320D7DCCE32703ACAB9A45E0 /* Three20.xcodeproj */,
 				320A737074758E53BA54BE90 /* Three20UINavigator.xcodeproj */,
@@ -328,6 +343,8 @@
 		1B769B6D133A80480026FD1E /* beatiful girls */ = {
 			isa = PBXGroup;
 			children = (
+				1BBB38E1135344E600F33A5C /* Tweet.h */,
+				1BBB38E2135344E600F33A5C /* Tweet.m */,
 				1B808411133A8752005215F0 /* Photo.h */,
 				1B808412133A8752005215F0 /* Photo.m */,
 				1B808413133A8752005215F0 /* PhotoSet.h */,
@@ -688,6 +705,7 @@
 				1B77C30A1350C6030007FB16 /* SBJsonBase.m in Sources */,
 				1B77C30B1350C6030007FB16 /* SBJsonParser.m in Sources */,
 				1B77C30C1350C6030007FB16 /* SBJsonWriter.m in Sources */,
+				1BBB38E3135344E600F33A5C /* Tweet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,6 +834,7 @@
 				INFOPLIST_FILE = "beatiful girls/beatiful girls-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -830,6 +849,7 @@
 				INFOPLIST_FILE = "beatiful girls/beatiful girls-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

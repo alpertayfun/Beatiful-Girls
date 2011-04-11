@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 #import <Three20/Three20.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 @class PhotoSet;
 @class FBSession;
 
-@interface RootViewController : TTPhotoViewController <UIActionSheetDelegate,FBSessionDelegate, FBRequestDelegate> {
+
+@interface RootViewController : TTPhotoViewController <UIActionSheetDelegate,FBSessionDelegate, FBRequestDelegate,MFMailComposeViewControllerDelegate> {
 
     //IBOutlet UIImageView *imgview22;
     PhotoSet *_photoSet;
@@ -21,6 +24,7 @@
 	FBLoginDialog *_loginDialog;
 	NSString *_facebookName;
 	BOOL _posting;
+
 
 }
 
@@ -33,4 +37,7 @@
 
 - (void)postToWall;
 - (void)getFacebookName;
+
+- (void)displayComposerSheet;
+- (void)launchMailAppOnDevice;
 @end
